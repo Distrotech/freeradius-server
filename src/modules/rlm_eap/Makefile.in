@@ -35,14 +35,14 @@ $(LT_OBJS): $(HEADERS)
 include ../rules.mak
 
 radeapclient$(EXEEXT): radeapclient.lo $(CLIENTLIBS)
-	$(LIBTOOL) --mode=link $(CC) $(LDFLAGS) $(RLM_LDFLAGS) -o radeapclient$(EXEEXT) radeapclient.lo $(LIBRADIUS) $(CLIENTLIBS) $(LIBS) $(OPENSSL_LIBS)
+	$(LIBTOOL) --tag=CC --mode=link $(CC) $(LDFLAGS) $(RLM_LDFLAGS) -o radeapclient$(EXEEXT) radeapclient.lo $(LIBRADIUS) $(CLIENTLIBS) $(LIBS) $(OPENSSL_LIBS)
 
 radeapclient.lo: radeapclient.c $(HEADERS)
-	$(LIBTOOL) --mode=compile $(CC) $(CFLAGS) $(RLM_CFLAGS) -c radeapclient.c
+	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(RLM_CFLAGS) -c radeapclient.c
 
 install-subdirs:
 	@$(MAKE) $(MFLAGS) WHAT_TO_MAKE=install common
-	$(LIBTOOL) --mode=install $(INSTALL) -m 755 $(INSTALLSTRIP) radeapclient$(EXEEXT) $(R)$(bindir)
+	$(LIBTOOL) --tag=CC --mode=install $(INSTALL) -m 755 $(INSTALLSTRIP) radeapclient$(EXEEXT) $(R)$(bindir)
 
 .PHONY: common $(RLM_SUBDIRS)
 

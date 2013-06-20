@@ -63,10 +63,10 @@ $(LT_OBJS): $(SERVER_HEADERS)
 #
 #######################################################################
 %.lo: %.c
-	$(LIBTOOL) --mode=compile $(CC) $(CFLAGS) $(RLM_CFLAGS) -c $<
+	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(RLM_CFLAGS) -c $<
 
 %.lo: %.cpp
-	$(LIBTOOL) --mode=compile $(CXX) $(CFLAGS) $(RLM_CFLAGS) -c $<
+	$(LIBTOOL) --tag=CC --mode=compile $(CXX) $(CFLAGS) $(RLM_CFLAGS) -c $<
 
 ifneq ($(TARGET),)
 #######################################################################
@@ -120,7 +120,7 @@ build-module: $(TARGET).la $(RLM_UTILS)
 	done
 
 $(TARGET).la: $(RLM_SUBDIRS) $(LT_OBJS)
-	$(LIBTOOL) --mode=link $(CC) -release $(RADIUSD_VERSION) \
+	$(LIBTOOL) --tag=CC --mode=link $(CC) -release $(RADIUSD_VERSION) \
 	-module $(LINK_MODE) $(LDFLAGS) $(RLM_LDFLAGS) -o $@     \
 	-rpath $(libdir) $^ $(LIBRADIUS) $(RLM_LIBS) $(LIBS)
 
@@ -168,7 +168,7 @@ reconfig:
 install:
 	@[ "x$(RLM_INSTALL)" = "x" ] || $(MAKE) $(MFLAGS) $(RLM_INSTALL)
 	if [ "x$(TARGET)" != "x" ]; then \
-	    $(LIBTOOL) --mode=install $(INSTALL) -c \
+	    $(LIBTOOL) --tag=CC --mode=install $(INSTALL) -c \
 		$(TARGET).la $(R)$(libdir)/$(TARGET).la || exit $$?; \
 	    rm -f $(R)$(libdir)/$(TARGET)-$(RADIUSD_VERSION).la; \
 	    ln -s $(TARGET).la $(R)$(libdir)/$(TARGET)-$(RADIUSD_VERSION).la || exit $$?; \

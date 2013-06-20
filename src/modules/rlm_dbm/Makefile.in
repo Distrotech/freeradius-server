@@ -13,20 +13,20 @@ RLM_INSTALL = @dbm_install@
 include ../rules.mak
 
 rlm_dbm_parser: rlm_dbm_parser.lo $(LIBRADIUS)
-	$(LIBTOOL) --mode=link $(CC) $(LDFLAGS) $(RLM_LDFLAGS) \
+	$(LIBTOOL) --tag=CC --mode=link $(CC) $(LDFLAGS) $(RLM_LDFLAGS) \
 		-o $@ $^ $(RLM_LIBS) $(LIBS)
 
 rlm_dbm_cat: rlm_dbm_cat.lo $(LIBRADIUS)
-	$(LIBTOOL) --mode=link $(CC) $(LDFLAGS) $(RLM_LDFLAGS) \
+	$(LIBTOOL) --tag=CC --mode=link $(CC) $(LDFLAGS) $(RLM_LDFLAGS) \
 		-o $@ $^ $(RLM_LIBS) $(LIBS)
 
 #
 #  Install the utility programs in the bin directory.
 #
 rlm_dbm_install: rlm_dbm_cat rlm_dbm_parser
-	$(LIBTOOL) --mode=install $(INSTALL) -m 755 $(INSTALLSTRIP) \
+	$(LIBTOOL) --tag=CC --mode=install $(INSTALL) -m 755 $(INSTALLSTRIP) \
 		rlm_dbm_cat$(EXEEXT) $(R)$(bindir)
-	$(LIBTOOL) --mode=install $(INSTALL) -m 755 $(INSTALLSTRIP) \
+	$(LIBTOOL) --tag=CC --mode=install $(INSTALL) -m 755 $(INSTALLSTRIP) \
 		rlm_dbm_parser$(EXEEXT) $(R)$(bindir)
 	$(INSTALL) -m 644 rlm_dbm_cat.8 $(R)$(mandir)/man8
 	$(INSTALL) -m 644 rlm_dbm_parser.8 $(R)$(mandir)/man8

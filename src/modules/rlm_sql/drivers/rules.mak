@@ -55,7 +55,7 @@ $(LT_OBJS):  $(SERVER_HEADERS)
 #
 #######################################################################
 %.lo: %.c
-	$(LIBTOOL) --mode=compile $(CC) $(CFLAGS) $(RLM_SQL_CFLAGS) -c $<
+	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(RLM_SQL_CFLAGS) -c $<
 
 ifneq ($(TARGET),)
 #######################################################################
@@ -101,7 +101,7 @@ build-module: $(TARGET).la
 	done
 
 $(TARGET).la: $(LT_OBJS)
-	$(LIBTOOL) --mode=link $(CC) -release $(RADIUSD_VERSION) \
+	$(LIBTOOL) --tag=CC --mode=link $(CC) -release $(RADIUSD_VERSION) \
 	-module $(LINK_MODE) $(LDFLAGS) $(RLM_SQL_LDFLAGS) -o $@ \
 	-rpath $(libdir) $^ $(RLM_SQL_LIBS)
 
@@ -145,7 +145,7 @@ reconfig:
 #
 install:
 	if [ "x$(TARGET)" != "x" ]; then \
-	    $(LIBTOOL) --mode=install $(INSTALL) -c \
+	    $(LIBTOOL) --tag=CC --mode=install $(INSTALL) -c \
 		$(TARGET).la $(R)$(libdir)/$(TARGET).la || exit $$?; \
 	    rm -f $(R)$(libdir)/$(TARGET)-$(RADIUSD_VERSION).la; \
 	    ln -s $(TARGET).la $(R)$(libdir)/$(TARGET)-$(RADIUSD_VERSION).la || exit $$?; \
