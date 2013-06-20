@@ -42,8 +42,10 @@ tests:
 # For compatibility with typical GNU packages (e.g. as seen in libltdl),
 # we make sure DESTDIR is defined.
 #
+R = $(DESTDIR)
 export DESTDIR := $(R)
 install:
+	test -d $(R)$(libdir) || mkdir -p $(R)$(libdir)
 	$(INSTALL) -d -m 755	$(R)$(sbindir)
 	$(INSTALL) -d -m 755	$(R)$(bindir)
 	$(INSTALL) -d -m 755	$(R)$(raddbdir)
@@ -94,7 +96,7 @@ common: $(SUBDIRS)
 
 $(SUBDIRS):
 	@echo "Making $(WHAT_TO_MAKE) in $@..."
-	@$(MAKE) $(MFLAGS) -C $@ $(WHAT_TO_MAKE)
+	@$(MAKE) R=$(R) $(MFLAGS) -C $@ $(WHAT_TO_MAKE)
 
 distclean: clean
 	rm -f config.cache config.log config.status libtool \
