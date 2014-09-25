@@ -1,3 +1,9 @@
+freeradius (3.0.5+git) unstable; urgency=medium
+
+  * New upstream version.
+
+ -- Arran Cudbard-Bell <a.cudbardb@freeradius.org>  Thu, 25 Sep 2014 08:30:00 -0400
+
 freeradius (3.0.4+git) unstable; urgency=medium
 
   * New upstream version.
